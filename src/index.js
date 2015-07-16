@@ -200,6 +200,40 @@ export default React.createClass({
     this.autoplay()
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    let newState = {}, props = nextProps
+
+    // Default: horizontal
+    newState.total = props.children
+      ? (props.children.length || 1)
+      : 0
+
+    // Try to preserve current index
+    if (this.props.width != props.width ||
+      this.props.height != props.height ||
+      this.props.loop != props.loop ||
+      this.props.horizontal != props.horizontal ||
+      this.state.total != newState.total) {
+      newState.dir = props.horizontal == false ? 'y' : 'x'
+      newState.width = props.width || width
+      newState.height = props.height || height
+      newState.index = newState.total > 1
+        ? Math.min(props.index, newState.total - 1)
+        : 0
+
+      newState.offset = {}
+
+      if(newState.total > 1) {
+        let setup = props.loop ? 1 : newState.index
+        newState.offset[newState.dir] = newState.dir == 'y'
+          ? newState.height * setup
+          : newState.width * setup
+      }
+    }
+
+    this.setState(newState)
+  },
+
   /**
    * Automatic rolling
    */
