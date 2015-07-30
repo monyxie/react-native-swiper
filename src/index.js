@@ -333,7 +333,7 @@ export default React.createClass({
    * @param  {number} index offset index
    */
   scrollTo(index) {
-    if(this.state.isScrolling) return
+    if(this.state.isScrolling || this.state.total < 2) return
     let state = this.state
     let diff = (this.props.loop ? 1 : 0) + index + this.state.index
     let x = 0
