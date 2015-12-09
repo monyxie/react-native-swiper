@@ -27,11 +27,7 @@ var _reactTimerMixin = require('react-timer-mixin');
 
 var _reactTimerMixin2 = _interopRequireDefault(_reactTimerMixin);
 
-var _Dimensions = require('Dimensions');
-
-var _Dimensions2 = _interopRequireDefault(_Dimensions);
-
-var _Dimensions$get = _Dimensions2['default'].get('window');
+var _Dimensions$get = _reactNative.Dimensions.get('window');
 
 var width = _Dimensions$get.width;
 var height = _Dimensions$get.height;
